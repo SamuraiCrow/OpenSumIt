@@ -132,7 +132,7 @@ void CCellView::MouseMoved(BPoint point, uint32 transit, const BMessage *message
 	if (message &&
 		(message->what == B_SIMPLE_DATA || message->what == 'MIME'))
 	{
-		long l;
+		ssize_t l;
 		const void *p;
 
 		switch (transit)
@@ -198,7 +198,7 @@ void CCellView::MouseMoved(BPoint point, uint32 transit, const BMessage *message
 
 void CCellView::HandleDrop(BMessage *inMessage)
 {
-	long l;
+	ssize_t l;
 	void * p;
 	BPoint dp = inMessage->DropPoint();
 	

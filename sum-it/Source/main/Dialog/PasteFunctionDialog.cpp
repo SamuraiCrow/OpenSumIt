@@ -123,11 +123,11 @@ bool CPasteFunctionDialog::OKClicked()
 			;
 		else if ((cp = strchr(s, '(')) != NULL)
 		{
-			int start;
+			int32 start;
 			
 			start = cp - s + 1;
 			
-			int end = 0;
+			int32 end = 0;
 			char *sp;
 			
 			if ((sp = strchr(cp, gListSeparator)) != NULL)

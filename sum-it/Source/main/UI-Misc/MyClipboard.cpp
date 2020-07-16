@@ -180,7 +180,7 @@ bool CClipboard::GetCells(CContainer **outCopy, range *outRange)
 			fView->SetPicture(NULL, BRect());
 			
 			const void *p;
-			long l;
+			ssize_t l;
 			if (be_clipboard->Data()->FindData("text/plain", B_MIME_DATA, &p, &l) != B_NO_ERROR)
 				result = false;
 	
@@ -210,7 +210,7 @@ bool CClipboard::ContainsData()
 	
 	if (be_clipboard->Lock())
 	{
-		long l;
+		ssize_t l;
 		const void *p;
 		
 		if (be_clipboard->Data()->FindPointer("container", (void**)&p) == B_NO_ERROR)

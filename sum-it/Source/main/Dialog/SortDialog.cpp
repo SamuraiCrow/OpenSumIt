@@ -218,7 +218,7 @@ void CSortDialog::UpdateFields()
 bool CSortDialog::OKClicked()
 {
 	BMessage msg(msg_Sort);
-	int key1, key2, key3;
+	int32 key1, key2, key3;
 	bool asc1, asc2, asc3;
 	
 	range r;

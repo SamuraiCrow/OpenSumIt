@@ -351,7 +351,7 @@ CCellWindow::MenusBeginning()
 	{	
 		BMessage *msg = new BMessage(msg_SelectWindow);
 		CCellWindow *w = (CCellWindow *)sWindowList.ItemAt(i);
-		msg->AddInt32("window", (long)w);
+		msg->AddInt32("window", (int32)w);
 		fWindowMenu->AddItem(new BMenuItem(w->Title(), msg));
 	}
 	
