@@ -58,7 +58,7 @@ class CTextControl;
 class CDialog;
 class MThread;
 
-const ulong
+const uint32
 	msg_Quit = 'Quit',
 	msg_Read = 'RDat';
 
@@ -128,7 +128,7 @@ public:
 protected:
 
 	void				InitWindow();
-	void BuildButton(BRect inFrame, const char *name, ulong message, int normalID, int pushedID);
+	void BuildButton(BRect inFrame, const char *name, uint32 message, int normalID, int pushedID);
 	
 	virtual void		WindowActivated(bool active);
 	
@@ -163,7 +163,7 @@ protected:
 	static BRect		GetFrameRect();
 	
 	static BList		sWindowList;
-	static long		sUntitledCount;
+	static int32		sUntitledCount;
 };
 
 inline long

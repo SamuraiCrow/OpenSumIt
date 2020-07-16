@@ -1,4 +1,4 @@
-/*	$Id: SymbolTable.cpp,v 1.1.1.1 2000/03/05 06:22:42 tpv Exp $
+/*	$Id$
 	
 	Copyright 1996, 1997, 1998
 	        Hekkelman Programmatuur B.V.  All rights reserved.

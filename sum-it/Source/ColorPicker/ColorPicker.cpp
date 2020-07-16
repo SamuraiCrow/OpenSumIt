@@ -44,7 +44,7 @@
 #include "KeyFilter.h"
 #endif
 
-const ulong
+const uint32
 	msg_OK = 'OK  ',
 	msg_Cancel = 'Cncl',
 	msg_ManualChange = 'MnCh';

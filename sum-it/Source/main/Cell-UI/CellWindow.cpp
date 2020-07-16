@@ -152,11 +152,11 @@
 #include <Entry.h>
 
 BList 	CCellWindow::sWindowList;
-long	CCellWindow::sUntitledCount = 1;
+int32	CCellWindow::sUntitledCount = 1;
 
 class CCellWindowMessageFilter : public BMessageFilter {
 public:
-		CCellWindowMessageFilter(ulong inMessage);
+		CCellWindowMessageFilter(uint32 inMessage);
 
 virtual filter_result Filter(BMessage *message, BHandler **target);
 };
@@ -454,7 +454,7 @@ void CCellWindow::InitWindow()
 }
 
 void CCellWindow::BuildButton(BRect inFrame, const char *name,
-	ulong message, int normalID, int pushedID)
+	uint32 message, int normalID, int pushedID)
 {
 	BRect b(0.0, 0.0, 15.0, 15.0);
 	BBitmap *bmp = new BBitmap(b, B_COLOR_8_BIT);
@@ -594,7 +594,7 @@ void * CCellWindow::GetCellFormula( const cell& cell )
 
 //#pragma mark -
 
-CCellWindowMessageFilter::CCellWindowMessageFilter(ulong inMessage)
+CCellWindowMessageFilter::CCellWindowMessageFilter(uint32 inMessage)
 	: BMessageFilter(B_ANY_DELIVERY, B_ANY_SOURCE, inMessage)
 {
 } /* CCellWindowMessageFilter::CCellWindowMessageFilter */
@@ -608,7 +608,7 @@ filter_result CCellWindowMessageFilter::Filter(
 
 	filter_result result = B_DISPATCH_MESSAGE;
 
-	long key, modifiers;
+	int32 key, modifiers;
 	message->FindInt32("raw_char", &key);
 	message->FindInt32("modifiers", &modifiers);
 	modifiers &= ~B_NUM_LOCK;

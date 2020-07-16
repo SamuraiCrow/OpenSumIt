@@ -1,8 +1,8 @@
-/*	$Id: RElem.cpp,v 1.1.1.1 2000/03/05 06:22:34 tpv Exp $
-	
+/*	$Id$
+
 	Copyright 1996, 1997, 1998
 	        Hekkelman Programmatuur B.V.  All rights reserved.
-	
+
 	Redistribution and use in source and binary forms, with or without
 	modification, are permitted provided that the following conditions are met:
 	1. Redistributions of source code must retain the above copyright notice,
@@ -12,13 +12,13 @@
 	   and/or other materials provided with the distribution.
 	3. All advertising materials mentioning features or use of this software
 	   must display the following acknowledgement:
-	   
+
 	    This product includes software developed by Hekkelman Programmatuur B.V.
-	
+
 	4. The name of Hekkelman Programmatuur B.V. may not be used to endorse or
 	   promote products derived from this software without specific prior
 	   written permission.
-	
+
 	THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES,
 	INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
 	FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL
@@ -28,7 +28,7 @@
 	OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
 	WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
 	OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-	ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 	
+	ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 	Created: 12/02/98 15:35:47
 */
@@ -37,11 +37,13 @@
 #include "RElem.h"
 #include "rez.h"
 #include "RState.h"
-#include <cstdio>
-#include <cstring>
-#include <cstdlib>
 
-RElem::RElem(REval *v, int size, int offset, RState *state)
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+
+RElem::RElem(REval *v, int32 size, int32 offset, RState *state)
 {
 	fNext = NULL;
 	fType = relEval;
@@ -53,12 +55,12 @@ RElem::RElem(REval *v, int size, int offset, RState *state)
 	fValue->SetElement(this);
 } /* RElem::RElem */
 
-RElem::RElem(const char *s, int size, int offset, RState *state)
+RElem::RElem(const char *s, int32 size, int32 offset, RState *state)
 {
 	fNext = NULL;
 	fType = relString;
 	fString = (char *)malloc(size);
-	if (!fString) rez_error("Insufficient memory");
+	if (!fString) error("Insufficient memory");
 	memcpy(fString, s, size);
 	fLabel = NULL;
 	fSize = 8 * size;
@@ -66,7 +68,7 @@ RElem::RElem(const char *s, int size, int offset, RState *state)
 	fState = state;
 } /* RElem::RElem */
 
-RElem::RElem(int size, int offset, RState *state)
+RElem::RElem(int32 size, int32 offset, RState *state)
 {
 	fNext = NULL;
 	fValue = NULL;
@@ -76,18 +78,18 @@ RElem::RElem(int size, int offset, RState *state)
 	fOffset = offset;
 	fState = state;
 } /* RElem::RElem */
-	
+
 void RElem::Write()
 {
 	BMallocIO stream;
 	RElem *elem = this;
-	
+
 	while (elem)
 	{
 		elem->Write(this, stream);
 		elem = elem->fNext;
 	}
-	
+
 	gResSize = stream.BufferLength();
 	gResData = malloc(gResSize);
 	memcpy(gResData, stream.Buffer(), gResSize);
@@ -95,12 +97,12 @@ void RElem::Write()
 
 void RElem::Write(RElem *head, BPositionIO& stream)
 {
-	if (verbose >= 2) printf("Writing %d, this: %08x, next: %08x\n", fType, this, fNext);
+	if (verbose >= 2) printf("Writing %" B_PRIuADDR ", this: %p, next: %p\n", fType, this, fNext);
 	switch (fType)
 	{
 		case relEval:
 		{
-			int t = REvaluate(fValue, head);
+			addr_t t = REvaluate(fValue, head);
 			switch (fSize)
 			{
 				case 8:
@@ -119,22 +121,27 @@ void RElem::Write(RElem *head, BPositionIO& stream)
 					stream.Write(&t, 4);
 					break;
 				default:
-					rez_error("unsupported size: %d", fSize);
+					error("unsupported size: %d", fSize);
 			}
 			break;
 		}
 		case relString:
 			stream.Write(fString, fSize / 8);
 			break;
+		case relFill:
+			// [zooey]: this has been added because gcc throws a warning
+			//				about relFill not being handled otherwise.
+			//				TODO: shouldn't we actually DO something here?
+			break;
 	}
 } /* RElem::Write */
 
-void RAddElement(RElem **head, REval *v, int size, RState *state)
+void RAddElement(RElem **head, REval *v, int32 size, RState *state)
 {
-	int offset = 0;
-	
+	int32 offset = 0;
+
 	RElem *h = *head;
-	
+
 	if (h)
 	{
 		while (h->fNext)
@@ -143,23 +150,23 @@ void RAddElement(RElem **head, REval *v, int size, RState *state)
 			h = h->fNext;
 		}
 	}
-	
+
 	RElem *n = new RElem(v, size, offset, state);
 	if (n->fValue == NULL || n->fValue->fElem != n)
-		rez_error("internal error 5");
-	
+		error("internal error 5");
+
 	if (h)
 		h->fNext = n;
 	else
 		*head = n;
 } /* RAddElement */
 
-void RAddElement(RElem **head, const char *s, int size, RState *state)
+void RAddElement(RElem **head, const char *s, int32 size, RState *state)
 {
-	int offset = 0;
-	
+	int32 offset = 0;
+
 	RElem *h = *head;
-	
+
 	if (h)
 	{
 		while (h->fNext)
@@ -168,22 +175,21 @@ void RAddElement(RElem **head, const char *s, int size, RState *state)
 			h = h->fNext;
 		}
 	}
-	
+
 	RElem *n = new RElem(s, size, offset, state);
-	
+
 	if (h)
 		h->fNext = n;
 	else
 		*head = n;
 } /* RAddElement */
 
-int RElem::FindIdentifier(int v)
+addr_t RElem::FindIdentifier(addr_t v)
 {
 	RSValue *vstate = fState ? dynamic_cast<RSValue*>(fState) : NULL;
-	int id = v;
-	
-	if (vstate && vstate->ResolveIdentifier(v))
-		return v;
-	else
-		rez_error("Unknown identifier: %s", ST_Ident(id));
+	addr_t id = v;
+
+	if (!(vstate && vstate->ResolveIdentifier(v)))
+		error("Unknown identifier: %s", ST_Ident(id));
+	return v;
 } /* RElem::FindIdentifier */

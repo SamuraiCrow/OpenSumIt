@@ -81,7 +81,7 @@
 #include <Button.h>
 #include <TextControl.h>
 
-const ulong
+const uint32
 	msg_ListSelect = 'LstS',
 	msg_ListInvoke = 'LstI';
 

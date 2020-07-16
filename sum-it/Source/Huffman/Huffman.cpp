@@ -47,6 +47,7 @@
 #include <ByteOrder.h>
 #include <cstdlib>
 #include <cstring>
+#include <netinet/in.h>
 
 #define kVersion htonl('Hfmn')	// ???????
 

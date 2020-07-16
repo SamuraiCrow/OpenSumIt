@@ -4,10 +4,10 @@ DEBUG := 1
 BEOS_VERS   :=r$(shell uname -r)
 
 MACHINE=$(shell uname -m)
-ifeq ($(MACHINE), BePC)
-	CPU     := x86
+ifeq ($(MACHINE), x86_64)
+	CPU     := x86_64
 else
-	CPU     := ppc
+	CPU     := x86
 endif
 
 ifeq ($(DEBUG), 1)

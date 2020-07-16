@@ -127,7 +127,7 @@ void CCellView::StartDrag(BPoint where, bool copy)
 	DragMessage(&msg, dragRect, this);
 } /* CCellView::StartDrag */
 
-void CCellView::MouseMoved(BPoint point, ulong transit, const BMessage *message)
+void CCellView::MouseMoved(BPoint point, uint32 transit, const BMessage *message)
 {
 	if (message &&
 		(message->what == B_SIMPLE_DATA || message->what == 'MIME'))
@@ -184,7 +184,7 @@ void CCellView::MouseMoved(BPoint point, ulong transit, const BMessage *message)
 		{
 			if (fCurrentCursor != curPlus)
 			{
-				be_app->SetCursor(gResourceManager.LoadCursor(0L));
+				be_app->SetCursor(gResourceManager.LoadCursor(0));
 				fCurrentCursor = curPlus;
 			}
 		}

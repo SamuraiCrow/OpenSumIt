@@ -38,7 +38,7 @@
 
 */
 
-const ulong msg_FormatDateTimeChanged = 'DFch';
+const uint32 msg_FormatDateTimeChanged = 'DFch';
 
 #include "RDialog.h"
 

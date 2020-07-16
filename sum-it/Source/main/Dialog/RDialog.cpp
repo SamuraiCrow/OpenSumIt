@@ -98,7 +98,7 @@ CRDialog::~CRDialog()
 
 void CRDialog::ConstructFromTemplate(BPositionIO& buf)
 {
-	long token, l, x, size;
+	int32 token, l, x, size;
 	BRect r;
 	char name[256], label[256];
 	BView *v = fMainView, *nv = NULL;

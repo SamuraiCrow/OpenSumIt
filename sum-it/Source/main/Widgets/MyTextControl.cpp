@@ -131,7 +131,7 @@ void CTextControl::MessageReceived(BMessage *inMessage)
 
 void CTextControl::EnterString(const char *s, long selStart, long selLen)
 {
-	long sStart, sEnd;
+	int32 sStart, sEnd;
 
 	if (!fCellView->IsEntering())
 		fCellView->SetEntering(true);
@@ -166,7 +166,7 @@ void CTextControl::EnterRange(range inRange)
 {
 	char s[20];
 
-	long sStart, sEnd;
+	int32 sStart, sEnd;
 	GetSelection(&sStart, &sEnd);
 	
 	if (!fCellEntered)
@@ -194,11 +194,11 @@ void CTextControl::MouseDown(BPoint where)
 	BTextView::MouseDown(where);
 } /* CTextControl::MouseDown */
 
-void CTextControl::KeyDown(const char *bytes, long numOfBytes)
+void CTextControl::KeyDown(const char *bytes, int32 numOfBytes)
 {
 	fCellEntered = false;
 	
-//	ulong modifiers;
+//	int32 modifiers;
 //	Window()->CurrentMessage()->FindInt32("modifiers", &modifiers);
 //	
 //	if (modifiers & B_CONTROL)
@@ -284,7 +284,7 @@ void CTextControl::DoEntryContextMenu(BPoint where)
 bool CTextControl::AcceptsDrop(const BMessage *inMessage)
 {
 	const char *p;
-	long l;
+	ssize_t l;
 	
 	if (inMessage->FindData("text/plain", B_MIME_DATA, (const void **)&p, &l))
 		return false;
@@ -301,7 +301,7 @@ bool CTextControl::AcceptsDrop(const BMessage *inMessage)
 bool CTextControl::AcceptsPaste(BClipboard *clipboard)
 {
 	const char *p;
-	long l;
+	ssize_t l;
 
 	if (be_clipboard->Data()->FindData("text/plain", B_MIME_DATA, (const void **)&p, &l) != B_NO_ERROR)
 		return false;

@@ -43,7 +43,7 @@
 
 #include "RDialog.h"
 
-const ulong
+const uint32
 	msg_QueryCanReplace = 'CRpl',
 	msg_ReplyCanReplace = 'RpRp';
 

@@ -1,4 +1,4 @@
-/*	$Id: rez.h,v 1.1.1.1 2000/03/05 06:22:47 tpv Exp $
+/*	$Id$
 	
 	Copyright 1996, 1997, 1998
 	        Hekkelman Programmatuur B.V.  All rights reserved.
@@ -36,6 +36,8 @@
 #ifndef REZ_H
 #define REZ_H
 
+#include <sys/types.h>
+
 struct RElem;
 
 struct ResHeader {
@@ -43,13 +45,12 @@ struct ResHeader {
 	int id;
 	int type;
 	
-	ResHeader(int t, int i, int n);
+	ResHeader(int t, int i, addr_t n);
 };
 
-void rez_error(const char *e, ...);
-void rez_warn(const char *e, ...);
-
-void WriteResource(int x);
+void error(const char *e, ...);
+void warn(const char *e, ...);
+void WriteResource(addr_t x);
 void WriteResource(const char *file, int type, int id, const char *name);
 void WriteHeader(unsigned long type, int id, const unsigned char *buf,
 	int bufSize, const char *name);
@@ -60,7 +61,7 @@ extern int gResID, gResType;
 extern char *gResName;
 extern void *gResData;
 extern int gResSize;
-extern char *gIncludePaths[];
+extern const char *gIncludePaths[];
 
 #include "mods.h"
 

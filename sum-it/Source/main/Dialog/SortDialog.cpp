@@ -102,7 +102,7 @@
 #include <MenuItem.h>
 
 
-const ulong
+const uint32
 	msg_DoSort = 'DSrt',
 	msg_OrderChanged = 'Ordr',
 	msg_KeyChanged = 'Kchg';

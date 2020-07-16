@@ -57,6 +57,7 @@
 
 #include <cmath>
 #include <ctime>
+#include <math.h>
 
 struct CellData;
 

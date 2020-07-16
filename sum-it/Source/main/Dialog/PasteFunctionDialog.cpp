@@ -60,7 +60,7 @@
 #include <ListView.h>
 
 
-const ulong
+const uint32
 	msg_MenuChanged = 'Mchg',
 	msg_FuncChanged = 'Fchg';
 

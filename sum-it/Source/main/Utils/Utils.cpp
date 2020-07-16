@@ -116,7 +116,7 @@ void NumToAString(long num, char *s)
 
 int GetFunctionNr(const char *name)
 {
-	long l, R, i, sLen;
+	int32 l, R, i, sLen;
 	char myFunc[10];
 	int d;
 
@@ -149,7 +149,7 @@ int GetFunctionNr(const char *name)
 
 void ReadCString(BPositionIO& inStream, int inMaxLen, char *outString)
 {
-	long l = 1;
+	int32 l = 1;
 	
 	do inStream.Read(outString++, l);
 	while (l && --inMaxLen && outString[-1]);
@@ -158,7 +158,7 @@ void ReadCString(BPositionIO& inStream, int inMaxLen, char *outString)
 void ReadString(BPositionIO& inStream, char *outString)
 {
 	char sl;
-	long l = 1;
+	int32 l = 1;
 	
 	inStream.Read(&sl, l);
 	while (l && sl--)
@@ -205,7 +205,7 @@ bool IsOptionalClick(BMessage *msg)
 {
 	try
 	{
-		long buttons, modifiers;
+		int32 buttons, modifiers;
 		FailOSErr(msg->FindInt32("buttons", &buttons), errMessageMissing);
 		FailOSErr(msg->FindInt32("modifiers", &modifiers), errMessageMissing);
 		return buttons & B_SECONDARY_MOUSE_BUTTON || modifiers & B_CONTROL_KEY;
@@ -338,7 +338,7 @@ static BMenu* GetMenu(int id)
 
 	BMenu *menu = new BMenu(s);
 	char type, key;
-	long l;
+	int32 l;
 	short modifiers;
 	rgb_color color = { 255, 255, 255, 255 };
 	

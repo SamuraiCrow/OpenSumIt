@@ -1,4 +1,4 @@
-/*	$Id: REval.h,v 1.1.1.1 2000/03/05 06:22:37 tpv Exp $
+/*	$Id$
 	
 	Copyright 1996, 1997, 1998
 	        Hekkelman Programmatuur B.V.  All rights reserved.
@@ -36,6 +36,8 @@
 #ifndef REVAL_H
 #define REVAL_H
 
+#include <sys/types.h>
+
 struct RElem;
 
 enum REvalType {
@@ -62,22 +64,22 @@ struct REval {
 	REvalType fType;
 	bool fOnStack;
 	union {
-		long fValue;
+		addr_t fValue;
 		REvalOp fOperator;
 		RFuncs fFunc;
 	};
 	RElem *fElem;
-	long fParams[10];
+	addr_t fParams[10];
 	
-	long Evaluate(RElem *head);
+	addr_t Evaluate(RElem *head);
 	void SetElement(RElem *elem);
 };
 
-long REvaluate(REval *e, RElem *head);
+addr_t REvaluate(REval *e, RElem *head);
 REval* RBinaryOp(REval *a, REval *b, REvalOp op);
 REval* RUnaryOp(REval *a, REvalOp op);
-REval* RValue(long v);
+REval* RValue(addr_t v);
 REval* RFunction(RFuncs f, ...);
-REval* RIdentifier(long v);
+REval* RIdentifier(addr_t v);
 
 #endif

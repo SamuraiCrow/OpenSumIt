@@ -83,6 +83,7 @@
 #include <SupportDefs.h>
 #include <GraphicsDefs.h>
 #include <Rect.h>
+#include <netinet/in.h>
 
 enum scChunkType {
 	kscVersion = 'VR',		// version

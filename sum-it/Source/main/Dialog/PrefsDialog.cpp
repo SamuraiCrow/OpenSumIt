@@ -113,7 +113,7 @@
 // This looks like hacking, and in fact it is...
 extern int gGridColor;
 
-const ulong
+const uint32
 	msg_ChangeTarget = 'ChTr',
 	msg_DefPageSetup = 'Page';
 

@@ -47,7 +47,7 @@ class CColorMenuItem : public BMenuItem {
 public:
 					CColorMenuItem(const char *label, rgb_color color,
 								   BMessage *message, bool useColor = TRUE,
-								   char shortcut = 0, ulong modifiers = 0);
+								   char shortcut = 0, uint32 modifiers = 0);
 
 	bool			IsColorEqual(rgb_color color);
 	

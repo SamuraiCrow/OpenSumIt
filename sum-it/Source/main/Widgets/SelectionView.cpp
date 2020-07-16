@@ -151,7 +151,7 @@ void CSelectionView::WindowActivated(bool active)
 
 void CSelectionView::MouseDown(BPoint where)
 {
-	ulong btns;
+	uint32 btns;
 	BPoint cur;
 	
 	GetMouse(&cur, &btns);

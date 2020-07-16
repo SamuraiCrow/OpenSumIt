@@ -73,7 +73,7 @@ MThread::Kill()
 
 	if (fThread >= B_NO_ERROR)
 	{
-		long		ignore;
+		int32		ignore;
 
 		kill_thread(fThread);
 		wait_for_thread(fThread, &ignore);

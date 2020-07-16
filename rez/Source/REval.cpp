@@ -1,4 +1,4 @@
-/*	$Id: REval.cpp,v 1.1.1.1 2000/03/05 06:22:37 tpv Exp $
+/*	$Id$
 	
 	Copyright 1996, 1997, 1998
 	        Hekkelman Programmatuur B.V.  All rights reserved.
@@ -39,7 +39,7 @@
 #include "rez.h"
 #include <math.h>
 
-long REval::Evaluate(RElem *head)
+addr_t REval::Evaluate(RElem *head)
 {
 	switch (fType)
 	{
@@ -47,7 +47,7 @@ long REval::Evaluate(RElem *head)
 			return fValue;
 		
 		case retIdentifier:
-			if (!fElem) rez_error("internal error 4");
+			if (!fElem) error("internal error 4");
 			return fElem->FindIdentifier(fValue);
 		
 		case retOperator:
@@ -118,7 +118,7 @@ long REval::Evaluate(RElem *head)
 					return (long)pow(REvaluate(fLeft, head), REvaluate(fRight, head));
 
 				default:
-					rez_error("internal error 1");
+					error("internal error 1");
 			}
 			break;
 		}
@@ -137,8 +137,10 @@ long REval::Evaluate(RElem *head)
 		}
 		
 		default:
-			rez_error("internal error 2");
+			error("internal error 2");
 	}
+
+	return 0;	// dummy value
 } /* REval::Evaluate */
 
 void REval::SetElement(RElem *elem)
@@ -150,7 +152,7 @@ void REval::SetElement(RElem *elem)
 	fElem = elem;
 } /* REval::SetElement */
 
-long REvaluate(REval *e, RElem *head)
+addr_t REvaluate(REval *e, RElem *head)
 {
 	return e->Evaluate(head);
 } /* REvaluate */
@@ -183,7 +185,7 @@ REval* RUnaryOp(REval *a, REvalOp op)
 	return r;
 } /* RUnaryOp */
 
-REval* RValue(long v)
+REval* RValue(addr_t v)
 {
 	REval *r = new REval;
 	
@@ -196,7 +198,7 @@ REval* RValue(long v)
 	return r;
 } /* RValue */
 
-REval* RIdentifier(long v)
+REval* RIdentifier(addr_t v)
 {
 	REval *r = new REval;
 	

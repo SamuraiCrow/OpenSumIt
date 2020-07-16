@@ -50,7 +50,7 @@ CColorMenuItem::CColorMenuItem(
 	BMessage 	*message,
 	bool		useColor,
 	char 		shortcut,
-	ulong 		modifiers)
+	uint32 		modifiers)
 		: BMenuItem(label, message, shortcut, modifiers)
 {
 	mColor = color;

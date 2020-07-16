@@ -43,7 +43,7 @@
 
 #include "Dialog.h"
 
-const ulong
+const uint32
 	msg_GetSelection = 'GSel',
 	msg_SetSelection  = 'SSel';
 
