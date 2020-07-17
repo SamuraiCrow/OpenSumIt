@@ -215,7 +215,7 @@ void CCellWindow::MessageReceived(BMessage	*inMessage)
 			case msg_SelectWindow:
 			{
 				CCellWindow *w;
-				w = (CCellWindow *)inMessage->FindInt32("window");
+				inMessage->FindPointer("window", (void**)&w);
 				w->Activate(true);
 				break;
 			}
@@ -351,7 +351,7 @@ CCellWindow::MenusBeginning()
 	{	
 		BMessage *msg = new BMessage(msg_SelectWindow);
 		CCellWindow *w = (CCellWindow *)sWindowList.ItemAt(i);
-		msg->AddInt32("window", (int32)w);
+		msg->AddPointer("window", w);
 		fWindowMenu->AddItem(new BMenuItem(w->Title(), msg));
 	}
 	

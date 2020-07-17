@@ -789,7 +789,7 @@ void CCellView::MessageReceived(BMessage *inMessage)
 			case msg_AnimateCell :
 			{
 				cell c;
-				inMessage->FindInt32("cell", (int32 *)&c);
+				inMessage->FindPointer("cell", (void**)&c);
 				if (!fEntering)
 				{
 					StWriteLock lock(fContainer);
