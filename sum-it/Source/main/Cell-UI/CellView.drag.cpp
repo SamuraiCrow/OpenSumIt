@@ -184,7 +184,7 @@ void CCellView::MouseMoved(BPoint point, uint32 transit, const BMessage *message
 		{
 			if (fCurrentCursor != curPlus)
 			{
-				be_app->SetCursor(gResourceManager.LoadCursor(0));
+				be_app->SetCursor(gResourceManager.LoadCursor((int32)0));
 				fCurrentCursor = curPlus;
 			}
 		}
