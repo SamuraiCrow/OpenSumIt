@@ -470,7 +470,7 @@ void CSumItApplication::RefsReceived(
         type_code type;
 	int32	count;
 	inMessage->GetInfo("refs", &type, &count);
-	for (long i = --count; i >= 0; i--)
+	for (int32 i = --count; i >= 0; i--)
 	{
 		entry_ref item;
 		if (inMessage->FindRef("refs", i, &item) == B_NO_ERROR)

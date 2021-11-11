@@ -105,7 +105,7 @@ CFormula::CFormula()
 
 CFormula::CFormula(void *inString)
 {
-	fString = (long *)inString;
+	fString = (int32 *)inString;
 } /* CFormula::CFormula */
 
 void CFormula::AddToken(PFToken inToken, const void *inData, int& ioOffset)
@@ -113,7 +113,7 @@ void CFormula::AddToken(PFToken inToken, const void *inData, int& ioOffset)
 	if (!fString)
 	{
 		ioOffset = 0;
-		fString = (long *)MALLOC(sizeof(long) * kBuildBufferSize);
+		fString = (int32 *)MALLOC(sizeof(int32) * kBuildBufferSize);
 		FailNil(fString);
 	}
 	
@@ -797,7 +797,7 @@ bool CFormula::IsConstant() const
 	return true;
 } /* CFormula::IsConstant */
 
-long CFormula::StringLength() const
+int32 CFormula::StringLength() const
 {
 	if (!fString)
 		return 0;
@@ -847,12 +847,12 @@ long CFormula::StringLength() const
 	}
 	while (theOpcode != opEnd);
 
-	return indx * sizeof(long);
+	return indx * sizeof(int32);
 } /* CFormula::StringLength */
 
 void* CFormula::CopyString() const
 {
-	long l = StringLength();
+	int32 l = StringLength();
 	void *t = MALLOC(l);
 	FailNil(t);
 	memcpy(t, fString, l);
@@ -879,7 +879,7 @@ void CFormula::operator=(void *inString)
 {
 	if (fString)
 		FREE(fString);
-	fString = (long *)inString;
+	fString = (int32 *)inString;
 } /* CFormula::operator= */
 
 bool CFormula::ReduceToValue(Value& val, CContainer *inContainer) const

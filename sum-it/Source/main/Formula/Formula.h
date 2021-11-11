@@ -77,10 +77,10 @@ enum PFToken {
 	valXRef
 };
 
-const long
+const int32
 	kMaxStackHeight = 25,
 	kMaxStringLength = 256,
-	kPFWordSize = sizeof(long),
+	kPFWordSize = sizeof(int32),
 	kPFAlignBits = kPFWordSize - 1;
 
 struct FuncCallData {
@@ -121,7 +121,7 @@ public:
 	void Clear();
 	void* DetachString();
 	void* CopyString() const;
-	long StringLength() const;
+	int32 StringLength() const;
 	void operator=(void *inString);
 	
 	void Write(BPositionIO& inStream);
@@ -129,16 +129,16 @@ public:
 	
 	void ReadOldMacFormula(BPositionIO& inStream, cell inLoc);
 	
-	long operator[](int indx) const
+	int32 operator[](int indx) const
 		{ return fString[indx]; };
 
 private:
-	long *fString;
+	int32 *fString;
 };
 
 class CFormulaIterator {
 public:
-	typedef long IterData[5];
+	typedef int32 IterData[5];
 
 	CFormulaIterator(void*, cell inLocation);
 	
@@ -148,7 +148,7 @@ public:
 	void SetData(const IterData& inData);
 
 private:
-	long *fString;
+	int32 *fString;
 	int fIndex;
 	range fRange;
 	cell fLocation;

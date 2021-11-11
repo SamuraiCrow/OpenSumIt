@@ -76,7 +76,7 @@
 CFormulaIterator::CFormulaIterator(void *inFormula, cell inLocation)
 {
 	fIndex = 0;
-	fString = (long *)inFormula;
+	fString = (int32 *)inFormula;
 	fLocation = inLocation;
 } /* CFormulaIterator::CFormulaIterator */
 

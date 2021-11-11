@@ -39,6 +39,7 @@
 */
 
 #include <stdlib.h>
+#include <SupportDefs.h>
 
 #ifndef CELL_H
 #define CELL_H
@@ -103,12 +104,12 @@ struct cell {
 
 inline bool cell::operator==(const cell& c) const
 {
-	return *((long *)&c) == *((long *)this);
+	return *((int32 *)&c) == *((int32 *)this);
 } /* cell::operator== */
 
 inline bool cell::operator!=(const cell& c) const
 {
-	return *((long *)&c) != *((long *)this);
+	return *((int32 *)&c) != *((int32 *)this);
 } /* cell::operator != */
 
 #if __INTEL__
@@ -127,12 +128,12 @@ inline bool cell::operator<=(const cell& c) const
 
 inline bool cell::operator<(const cell& c) const
 {
-	return *((long *)this) < *((long *)&c);
+	return *((int32 *)this) < *((int32 *)&c);
 } /* cell::operator< */
 
 inline bool cell::operator<=(const cell& c) const
 {
-	return *((long *)this) <= *((long *)&c);
+	return *((int32 *)this) <= *((int32 *)&c);
 } /* cell::operator<= */
 
 #endif

@@ -162,7 +162,7 @@ void CFormula::Read(BPositionIO& inStream, int *inFuncList)
 	char b;
 	PFToken opCode;
 	int offset = 0;
-	long buffer[1024];
+	int32 buffer[1024];
 	
 	fString = buffer;
 	
@@ -273,7 +273,7 @@ void CFormula::Read(BPositionIO& inStream, int *inFuncList)
 	while (opCode != opEnd);
 
 	int l = offset * kPFWordSize;
-	fString = (long *)MALLOC(l);
+	fString = (int32 *)MALLOC(l);
 	FailNil(fString);
 	memcpy(fString, buffer, l);
 } /* CFormula::Read */
