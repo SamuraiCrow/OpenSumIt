@@ -1,13 +1,11 @@
-
-BUILDING
--------------
+# BUILDING
 
 Automated building using script:
 
-> build.sh
+`build.sh`
 
 
-Manual building steps:
+## Manual building steps:
 
 1. in "bsl" directory type 'make'   
 2. copy 'bsl' binary to '/boot/home/config/non-packaged/bin'
@@ -17,7 +15,8 @@ Manual building steps:
 5. You have OpenSum-It binary
 
 
-NOTE! By default build system makes OpenSum-It binary with DEBUG turned on.
+## NOTE!
+By default build system makes OpenSum-It binary with DEBUG turned on.
 
 
 2013.11.03
