@@ -10,9 +10,9 @@ Please submit bug reports to sum-it-bugs@lists.sourceforge.net
 If you are interested in joining the project please visit http://sum-it.sourceforge.net
 
 
-See the file "Licence.md" for licencing information.
+See the file "Licence" for licencing information.
 
-See the file "Copyright.md" for copyright information.
+See the file "Copyright" for copyright information.
 
 OpenSum-It is Free Software you may freely use it without cost, however we do request that you provide feedback to the sum-it-bugs mailing list.
 
